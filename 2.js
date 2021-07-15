@@ -42,15 +42,27 @@ console.log(stringToArray("saya dan SAYA suka makan nasi"));
 function uniqueDuplicateFinder(str) {
   // Your code here
   let convertToArray = stringToArray(str);
-  let result = [];
+  let result = {
+    unique: [],
+    duplicate: [],
+  };
+  let tempObj = {};
   for (let i = 0; i < convertToArray.length; i++) {
-    let temp = convertToArray[i];
-    if (!result[temp]) {
-      result[temp] = "Unique";
+    if (tempObj[convertToArray[i]] === undefined) {
+      tempObj[convertToArray[i]] = 1;
     } else {
-      result[temp] = "duplicate";
+      tempObj[convertToArray[i]] += 1;
     }
   }
+
+  for (let key in tempObj) {
+    if (tempObj[key] > 1) {
+      result.duplicate.push(key);
+    } else {
+      result.unique.push(key);
+    }
+  }
+
   return result;
 }
 
